@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BA@50 R.S.V.P</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #fffaf5;
+      font-family: 'Cormorant Garamond', serif;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+
+    /* Hero Image Entrance + Shake */
+    @keyframes heroEntrance {
+      0%   { transform: translateX(-100%); opacity: 0; }
+      40%  { transform: translateX(20%); opacity: 1; }
+      60%  { transform: translateX(-10%); }
+      75%  { transform: translateX(5%); }
+      90%  { transform: translateX(-2%); }
+      100% { transform: translateX(0); }
+    }
+/* Fade-out effect before navigation */
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+    .hero img.animate-hero {
+      animation: heroEntrance 2.5s ease-out both;
+    }
+
+    /* Loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #fff0e6, #ffdab3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+   .loader-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('your-image2.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0;
+  animation: bgFadeIn 1.5s ease-out forwards 0.6s;
+transform: scale(0.98);
+  animation: bgFadeIn 1.5s ease-out forwards 0.6s;
+}
+
+@keyframes bgFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+    .loader-text {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 3.8rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+      z-index: 2;
+    }
+
+    .letter {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: reveal 0.6s forwards;
+      text-shadow: 0 0 8px #ffcc99, 0 0 15px #ffa366, 0 0 20px #ff944d;
+    }
+
+    .letter:nth-child(1) { animation-delay: 0.4s; }
+    .letter:nth-child(2) { animation-delay: 0.8s; }
+    .letter:nth-child(3) { animation-delay: 1.2s; }
+    .letter:nth-child(4) { animation-delay: 1.6s; }
+    .letter:nth-child(5) { animation-delay: 2.0s; }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+#main-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#main-content.visible {
+  opacity: 1;
+}
+
+    #main-content {
+      display: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .hero img {
+      width: 280px;
+      max-width: 80%;
+      filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.2));
+    }
+
+    .hero-button {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta-button {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      background: linear-gradient(145deg, #ffa500, #ffc67c);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .poem, .quote {
+      font-style: italic;
+      text-align: center;
+      font-size: 1.3rem;
+      opacity: 0.7;
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.9;
+    }
+
+
+    .countdowns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 1rem;
+      background: #f7f4ef;
+    }
+
+    .countdown-box {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      min-width: 220px;
+    }
+
+    .countdown-box h3 {
+      font-size: 1.3rem;
+      color: #ff7f50;
+      margin-bottom: 0.5rem;
+    }
+
+    .count {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .golden-jubilee {
+      background: linear-gradient(to right, #fff7f0, #fef9f5);
+      padding: 4rem 1rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .golden-jubilee h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .golden-jubilee p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .blank-section {
+      height: 350px;
+      background-image: url('background-dummy.png');
+      background-size: cover;
+      background-position: center;
+    }
+.rsvp-note {
+  margin-top: 0.8rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #b66b2f; /* deeper poetic tone */
+  text-shadow: 0 1px 4px rgba(255, 210, 155, 0.4);
+  animation: fadeInUp 1.2s ease-out both;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    .quote {
+      background: #f6f6f6;
+      font-size: 1.2rem;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .quote::before {
+      content: "❝";
+      font-size: 4rem;
+      color: #ffcc99;
+      position: absolute;
+      left: 20px;
+      top: -10px;
+      opacity: 0.3;
+    }
+.design-png {
+  position: absolute;
+  max-width: 190px;
+  z-index: 0;
+  opacity: 0.6;
+  animation: floaty 8s ease-in-out infinite alternate;
+}
+
+@keyframes floaty {
+  from { transform: translateY(0px) rotate(0deg); }
+  to { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Optional: shrink PNGs on mobile */
+@media (max-width: 768px) {
+  .design-png {
+    max-width: 70px;
+  }
+}
+
+    footer {
+  background: linear-gradient(135deg, #4b2e2e, #a65b00);
+  color: #fff8f0;
+  padding: 3rem 1rem 1rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+  text-align: left;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+}
+
+.footer-column h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: #ffddc1;
+}
+
+.footer-column p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-column {
+    flex: 1 1 100%;
+  }
+}
+    }
+  </style>
+<style>
+/* --- Skelly Cube Animation Styles Updated --- */
+.cube-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 5rem auto;
+  perspective: 1000px;
+  text-align: center;
+}
+
+.cube-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(2, 100px);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cube {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube 6s infinite linear;
+}
+
+.cube-face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to bottom right, #fff3e0, #ffe0b2); /* soft orange blend */
+  border: 2px dashed #f5a623; /* orange border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 1.5rem;
+  color: #5c3c00; /* deep brown-orange for contrast */
+  backface-visibility: hidden;
+box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
+}
+
+.cube-face.front  { transform: rotateY(0deg) translateZ(50px); }
+.cube-face.back   { transform: rotateY(180deg) translateZ(50px); }
+.cube-face.right  { transform: rotateY(90deg) translateZ(50px); }
+.cube-face.left   { transform: rotateY(-90deg) translateZ(50px); }
+.cube-face.top    { transform: rotateX(90deg) translateZ(50px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+@keyframes rotateCube {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+</style>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-overlay"></div>
+    <div class="loader-text">
+      <span class="letter">B</span>
+      <span class="letter">A</span>
+      <span class="letter">@</span>
+      <span class="letter">5</span>
+      <span class="letter">0</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <section class="hero" data-aos="fade-left" data-aos-duration="1200">
+      <img src="hero-image.png" class="animate-hero" alt="BA@50" />
+   <div class="hero-button" data-aos="zoom-in" data-aos-delay="500">
+  <div>
+    <button class="cta-button" id="rsvpBtn">Send in your RSVP today!</button>
+    <div class="rsvp-note">RSVP by September 30<sup>th</sup></div>
+  </div>
+</div>
+    </section>
+
+    <section class="poem" data-aos="fade-up" data-aos-delay="200">
+<img src="design1.png" class="design-png" style="top: -40px; left: 10%;" />
+<img src="design1.png" class="design-png" style="bottom: -30px; right: 12%;" />
+      <p>From whispered dreams to golden light,<br>A tapestry of years takes flight.<br>Fifty moments stitched with care,<br>In every smile, a story rare.</p>
+    </section>
+
+    <section class="countdowns" data-aos="fade-right" data-aos-delay="300">
+
+      <div class="countdown-box" data-aos="flip-left" data-aos-delay="400">
+        <h3>Las Vegas – May 6th to 9th</h3>
+        <div id="countdown-vegas" class="count">Loading...</div>
+      </div>
+      <div class="countdown-box" data-aos="flip-right" data-aos-delay="600">
+        <h3>ATL, Georgia – May 9th and 10th</h3>
+        <div id="countdown-atlanta" class="count">Loading...</div>
+      </div>
+    </section>
+
+    <section class="golden-jubilee" data-aos="fade-up" data-aos-delay="300">
+<img src="design5.png" class="design-png" style="top: -50px; left: 15%;" />
+<img src="design6.png" class="design-png" style="bottom: -20px; right: 15%;" />
+      <h2>The Golden Jubilee</h2>
+      <p>Through seasons past, through trials and joy,<br>The golden years do not destroy.<br>They bloom like dusk with rosy flame,<br>And carry forward your great name.</p>
+    </section>
+
+    <section class="blank-section" data-aos="zoom-in-up" data-aos-delay="300"></section>
+
+    <section class="quote" data-aos="fade-left" data-aos-delay="300">
+<img src="design1.png" class="design-png" style="top: -40px; right: 20%;" />
+
+      <p>"Fifty is not the age we fear,<br>but the poetry of every year<br>that shaped our souls and led us here."</p>
+    </section>
+<section class="cube-container" data-aos="zoom-in">
+  <h2 class="glitch-font" style="color:white;margin-bottom:2rem;">B A @ 5 0</h2>
+  <div class="cube-grid">
+    <div class="cube">
+      <div class="cube-face front">B</div>
+      <div class="cube-face back">B</div>
+      <div class="cube-face right">B</div>
+      <div class="cube-face left">B</div>
+      <div class="cube-face top">B</div>
+      <div class="cube-face bottom">B</div>
+    </div>
+    <div class="cube">
+      <div class="cube-face front">A</div>
+      <div class="cube-face back">A</div>
+      <div class="cube-face right">A</div>
+      <div class="cube-face left">A</div>
+      <div class="cube-face top">A</div>
+      <div class="cube-face bottom">A</div>
+    </div>
+    <div class="cube">
+      <div class="cube-face front">@</div>
+      <div class="cube-face back">@</div>
+      <div class="cube-face right">@</div>
+      <div class="cube-face left">@</div>
+      <div class="cube-face top">@</div>
+      <div class="cube-face bottom">@</div>
+    </div>
+    <div class="cube">
+      <div class="cube-face front">5</div>
+      <div class="cube-face back">5</div>
+      <div class="cube-face right">5</div>
+      <div class="cube-face left">5</div>
+      <div class="cube-face top">5</div>
+      <div class="cube-face bottom">5</div>
+    </div>
+    <div class="cube">
+      <div class="cube-face front">0</div>
+      <div class="cube-face back">0</div>
+      <div class="cube-face right">0</div>
+      <div class="cube-face left">0</div>
+      <div class="cube-face top">0</div>
+      <div class="cube-face bottom">0</div>
+    </div>
+    
+  </div>
+</section>
+
+
+    <footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>📍 Event Locations</h4>
+      <p>Las Vegas, May 6th - 9th</p>
+      <p>Atlanta Georgia, May 9th and 10th</p>
+    </div>
+   
+  <div class="footer-bottom">
+    © 2025 BA@50. Crafted with ❤️ for a golden celebration.
+  </div>
+</footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  function startCountdown(id, dateStr) {
+    const el = document.getElementById(id);
+    const target = new Date(dateStr).getTime();
+    function update() {
+      const now = new Date().getTime();
+      const diff = target - now;
+      if (diff <= 0) {
+        el.textContent = "Event Started";
+        return;
+      }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    update();
+    setInterval(update, 1000);
+  }
+
+  // SINGLE load event
+  window.addEventListener("load", () => {
+    startCountdown("countdown-vegas", "2026-05-06T00:00:00");
+    startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
+
+    setTimeout(() => {
+      document.querySelector(".loader").style.display = "none";
+      const mainContent = document.getElementById("main-content");
+      mainContent.style.display = "block";
+mainContent.classList.add("visible");
+
+      // ✅ Now that content is visible, initialize AOS
+      AOS.init({
+        once: true,
+        duration: 1000,
+        offset: 100,
+        easing: 'ease-in-out',
+      });
+
+      AOS.refresh();
+    }, 3000);
+  });
+</script>
+<script>
+  document.getElementById("rsvpBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = "rsvp.html";
+    }, 800); // must match transition duration in CSS
+  });
+</script>
+</body>
+</html>

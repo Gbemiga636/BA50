@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BA@50 RSVP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      background: #fffaf5;
+      color: #2c2c2c;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    body.fade-in {
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #fffdf9;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-indicator-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .step-indicator-inner {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      background-color: #ccc;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .step-indicator-inner.active {
+      background-color: #ffa500;
+    }
+
+    .step-indicator-inner.complete {
+      background-color: #e4b000;
+    }
+
+    .step-connector {
+      width: 40px;
+      height: 4px;
+      background-color: #bbb;
+      margin: 0 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .step-connector-inner {
+      height: 100%;
+      background-color: #ffa500;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .step {
+      display: none;
+      width: 100%;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+
+    .step.active {
+      display: block;
+      opacity: 1;
+      position: relative;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    input, button {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin: 0.5rem 0;
+      width: 100%;
+    }
+
+    .party-buttons button {
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(to right, #ffb347, #ffcc33);
+      color: #2c2c2c;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .party-buttons button.selected {
+      background: linear-gradient(to right, #e85d04, #ffba08);
+      color: white;
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+      transform: scale(1.02);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-nav button {
+      width: 60px;
+      height: 60px;
+      font-size: 2rem;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(145deg, #ffa500, #ffcc70);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .footer-nav button:hover {
+      background: #ff9c00;
+      transform: scale(1.1);
+    }
+
+    .countdowns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 1rem;
+      background: #f7f4ef;
+    }
+
+    .countdown-box {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      min-width: 220px;
+    }
+
+    .countdown-box h3 {
+      font-size: 1.3rem;
+      color: #ff7f50;
+      margin-bottom: 0.5rem;
+    }
+
+    .count {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .golden-jubilee {
+      background: linear-gradient(to right, #fff7f0, #fef9f5);
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .golden-jubilee p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .quote {
+      background: #f6f6f6;
+      font-style: italic;
+      text-align: center;
+      font-size: 1.3rem;
+      padding: 3rem 1rem;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #4b2e2e, #a65b00);
+      color: #fff8f0;
+      padding: 3rem 1rem 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+    }
+
+    .footer-column h4 {
+      color: #ffddc1;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" data-aos="fade-up">
+    <div class="step-indicator-row" id="stepIndicators"></div>
+
+    <form id="rsvpForm">
+      <div class="step active" id="step1">
+        <h2>Welcome to BA@50 RSVP 🎉</h2>
+        <p>Check out the next step below!</p>
+      </div>
+
+      <div class="step" id="step2">
+        <h2>Your Details</h2>
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="text" name="spouse" placeholder="Spouse Name (Optional)" />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+      </div>
+
+      <div class="step" id="step3">
+        <h2>Which Party Will You Attend?</h2>
+        <div class="party-buttons">
+          <button type="button" onclick="selectParty('Las Vegas')">PLAN TO ATTEND LAS VEGAS PARTY</button>
+          <button type="button" onclick="selectParty('Atlanta')">PLAN TO ATTEND ATLANTA GEORGIA PARTY</button>
+          <button type="button" onclick="selectParty('Both')">PLAN TO ATTEND BOTH</button>
+        </div>
+      </div>
+
+      <div class="step" id="step4">
+        <h2>Thank You For Your Response!</h2>
+        <p>We’ll be in touch. Cheers to a golden celebration!</p>
+        <div class="emoji">👍🏽</div>
+      </div>
+
+      <input type="hidden" name="party" id="partyChoice" />
+    </form>
+
+    <div class="footer-nav">
+      <button type="button" onclick="prevStep()">←</button>
+      <button type="button" onclick="nextStep()">→</button>
+    </div>
+  </div>
+
+  <section class="countdowns" data-aos="fade-right">
+    <div class="countdown-box" data-aos="flip-left">
+      <h3>Las Vegas – May 6</h3>
+      <div id="countdown-vegas" class="count">Loading...</div>
+    </div>
+    <div class="countdown-box" data-aos="flip-right">
+      <h3>Atlanta, Georgia – May 9</h3>
+      <div id="countdown-atlanta" class="count">Loading...</div>
+    </div>
+  </section>
+
+  <section class="golden-jubilee" data-aos="fade-up">
+    <h2>The Golden Jubilee</h2>
+    <p>Through seasons past, through trials and joy,<br>The golden years do not destroy.<br>They bloom like dusk with rosy flame,<br>And carry forward your great name.</p>
+  </section>
+
+  <section class="quote" data-aos="fade-left">
+    <p>"Fifty is not the age we fear,<br>but the poetry of every year<br>that shaped our souls and led us here."</p>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>📍 Event Locations</h4>
+        <p>Las Vegas, May 6th - 8th</p>
+        <p>Atlanta Georgia, May 9th - 10th</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 BA@50. Crafted with ❤️ for a golden celebration.
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+
+      AOS.init({ duration: 1000, once: true });
+
+      const steps = document.querySelectorAll(".step");
+      const indicators = document.getElementById("stepIndicators");
+      let current = 0;
+      let partySelected = false;
+
+      const backBtn = document.querySelector(".footer-nav button:first-child");
+      const nextBtn = document.querySelector(".footer-nav button:last-child");
+
+      function updateIndicators() {
+        indicators.innerHTML = "";
+        steps.forEach((_, i) => {
+          const circle = document.createElement("div");
+          circle.className = "step-indicator-inner";
+          if (i === current) circle.classList.add("active");
+          else if (i < current) circle.classList.add("complete");
+          circle.textContent = i < current ? "✓" : i + 1;
+          indicators.appendChild(circle);
+
+          if (i < steps.length - 1) {
+            const connector = document.createElement("div");
+            connector.className = "step-connector";
+            const line = document.createElement("div");
+            line.className = "step-connector-inner";
+            line.style.width = i < current ? "100%" : "0";
+            connector.appendChild(line);
+            indicators.appendChild(connector);
+          }
+        });
+
+        backBtn.style.display = current === 0 ? "none" : "inline-flex";
+        nextBtn.style.display = current === steps.length - 1 ? "none" : "inline-flex";
+      }
+
+      updateIndicators();
+
+      window.nextStep = function () {
+        if (current === 2 && !partySelected) {
+          alert("Please select a party before continuing.");
+          return;
+        }
+        if (current < steps.length - 1) {
+          steps[current].classList.remove("active");
+          current++;
+          steps[current].classList.add("active");
+          updateIndicators();
+        }
+      };
+
+      window.prevStep = function () {
+        if (current > 0) {
+          steps[current].classList.remove("active");
+          current--;
+          steps[current].classList.add("active");
+          updateIndicators();
+        }
+      };
+
+      window.selectParty = function (party) {
+        document.getElementById("partyChoice").value = party;
+        partySelected = true;
+
+        document.querySelectorAll(".party-buttons button").forEach((btn) => {
+          btn.classList.remove("selected");
+          if (btn.textContent.includes(party)) {
+            btn.classList.add("selected");
+          }
+        });
+      };
+
+      function startCountdown(id, dateStr) {
+        const el = document.getElementById(id);
+        const target = new Date(dateStr).getTime();
+
+        function update() {
+          const now = new Date().getTime();
+          const diff = target - now;
+          if (diff <= 0) {
+            el.textContent = "Event Started";
+            return;
+          }
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const m = Math.floor((diff / 1000 / 60) % 60);
+          const s = Math.floor((diff / 1000) % 60);
+          el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+        }
+
+        update();
+        setInterval(update, 1000);
+      }
+
+      startCountdown("countdown-vegas", "2026-05-06T00:00:00");
+      startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
+    });
+  </script>
+</body>
+</html>

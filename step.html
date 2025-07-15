@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vanilla JS Stepper</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .outer-container {
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border: 1px solid #222;
+    }
+    .step-indicator-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .step-indicator-inner {
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .step-indicator-inner.inactive {
+      background-color: #222;
+      color: #a3a3a3;
+    }
+    .step-indicator-inner.active {
+      background-color: #5227FF;
+      color: #fff;
+    }
+    .step-indicator-inner.complete {
+      background-color: #5227FF;
+      color: #fff;
+    }
+    .step-connector {
+      width: 40px;
+      height: 4px;
+      background-color: #52525b;
+      margin: 0 10px;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .step-connector-inner {
+      height: 100%;
+      background-color: #5227FF;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+    .step-content-default {
+      min-height: 100px;
+      transition: all 0.4s ease;
+      margin-bottom: 2rem;
+    }
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+    }
+    .back-button, .next-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 9999px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .back-button {
+      background: #ddd;
+      color: #222;
+    }
+    .back-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .next-button {
+      background: #5227FF;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer-container">
+    <div class="step-indicator-row" id="stepIndicators"></div>
+
+    <div class="step-content-default" id="stepContent">
+      <!-- Step content will go here -->
+    </div>
+
+    <div class="footer-nav">
+      <button class="back-button" id="backBtn">Back</button>
+      <button class="next-button" id="nextBtn">Continue</button>
+    </div>
+  </div>
+
+  <script>
+    const steps = [
+      "<h3>Step 1: Basic Information</h3><p>Enter your personal info.</p>",
+      "<h3>Step 2: Preferences</h3><p>Choose your preferences.</p>",
+      "<h3>Step 3: Review</h3><p>Confirm your details.</p>"
+    ];
+
+    let currentStep = 0;
+
+    const stepIndicators = document.getElementById("stepIndicators");
+    const stepContent = document.getElementById("stepContent");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function renderIndicators() {
+      stepIndicators.innerHTML = "";
+      steps.forEach((_, i) => {
+        const isActive = i === currentStep;
+        const isComplete = i < currentStep;
+
+        const indicator = document.createElement("div");
+        indicator.classList.add("step-indicator");
+
+        const inner = document.createElement("div");
+        inner.classList.add("step-indicator-inner");
+        inner.classList.add(isComplete ? "complete" : isActive ? "active" : "inactive");
+        inner.textContent = isComplete ? "✓" : i + 1;
+
+        indicator.appendChild(inner);
+        stepIndicators.appendChild(indicator);
+
+        if (i < steps.length - 1) {
+          const connector = document.createElement("div");
+          connector.className = "step-connector";
+          const innerLine = document.createElement("div");
+          innerLine.className = "step-connector-inner";
+          innerLine.style.width = isComplete ? "100%" : "0%";
+          connector.appendChild(innerLine);
+          stepIndicators.appendChild(connector);
+        }
+      });
+    }
+
+    function updateUI() {
+      stepContent.innerHTML = steps[currentStep];
+      renderIndicators();
+      backBtn.disabled = currentStep === 0;
+      nextBtn.textContent = currentStep === steps.length - 1 ? "Complete" : "Continue";
+    }
+
+    backBtn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        updateUI();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        updateUI();
+      } else {
+        stepContent.innerHTML = "<h3>🎉 Completed!</h3><p>Thanks for finishing the steps.</p>";
+        stepIndicators.innerHTML = "";
+        nextBtn.style.display = "none";
+        backBtn.style.display = "none";
+      }
+    });
+
+    // Initial render
+    updateUI();
+  </script>
+</body>
+</html>

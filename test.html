@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BA@50 R.S.V.P</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #fffaf5;
+      font-family: 'Cormorant Garamond', serif;
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #fff0e6, #ffd1a3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-text {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  color: #ff944d;
+}
+
+.letter {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: reveal 0.6s forwards;
+}
+
+.letter:nth-child(1) { animation-delay: 0.4s; }
+.letter:nth-child(2) { animation-delay: 0.8s; }
+.letter:nth-child(3) { animation-delay: 1.2s; }
+.letter:nth-child(4) { animation-delay: 1.6s; }
+.letter:nth-child(5) { animation-delay: 2.0s; }
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .hero img {
+      width: 280px;
+      max-width: 80%;
+      filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.2));
+    }
+
+    .hero-button {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cta-button {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      background: linear-gradient(145deg, #ffa500, #ffc67c);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .poem, .quote {
+      font-style: italic;
+      text-align: center;
+      font-size: 1.3rem;
+      opacity: 0.7;
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.9;
+    }
+
+    .countdowns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 1rem;
+      background: #f7f4ef;
+    }
+
+    .countdown-box {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: center;
+      min-width: 220px;
+    }
+
+    .countdown-box h3 {
+      font-size: 1.3rem;
+      color: #ff7f50;
+      margin-bottom: 0.5rem;
+    }
+
+    .count {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .golden-jubilee {
+      background: linear-gradient(to right, #fff7f0, #fef9f5);
+      padding: 4rem 1rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .golden-jubilee h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .golden-jubilee p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    .blank-section {
+      height: 350px;
+      background-image: url('background-dummy.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .quote {
+      background: #f6f6f6;
+      font-size: 1.2rem;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .quote::before {
+      content: "❝";
+      font-size: 4rem;
+      color: #ffcc99;
+      position: absolute;
+      left: 20px;
+      top: -10px;
+      opacity: 0.3;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .countdowns {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loader">
+  <div class="loader-text">
+    <span class="letter">B</span>
+    <span class="letter">A</span>
+    <span class="letter">@</span>
+    <span class="letter">5</span>
+    <span class="letter">0</span>
+  </div>
+</div>
+
+  <section class="hero">
+    <img src="hero-image.png" alt="BA@50" />
+    <div class="hero-button">
+      <a href="rsvp.html">
+        <button class="cta-button">Book Your Spot With Us Today</button>
+      </a>
+    </div>
+  </section>
+
+  <section class="poem">
+    <p>
+      From whispered dreams to golden light,<br>
+      A tapestry of years takes flight.<br>
+      Fifty moments stitched with care,<br>
+      In every smile, a story rare.
+    </p>
+  </section>
+
+  <section class="countdowns">
+    <div class="countdown-box">
+      <h3>Las Vegas – May 6</h3>
+      <div id="countdown-vegas" class="count">Loading...</div>
+    </div>
+    <div class="countdown-box">
+      <h3>Atlanta, Georgia – May 9</h3>
+      <div id="countdown-atlanta" class="count">Loading...</div>
+    </div>
+  </section>
+
+  <section class="golden-jubilee">
+    <h2>The Golden Jubilee</h2>
+    <p>
+      Through seasons past, through trials and joy,<br>
+      The golden years do not destroy.<br>
+      They bloom like dusk with rosy flame,<br>
+      And carry forward your great name.
+    </p>
+  </section>
+
+  <section class="blank-section"></section>
+
+  <section class="quote">
+    <p>
+      "Fifty is not the age we fear,<br>
+      but the poetry of every year<br>
+      that shaped our souls and led us here."
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 BA@50. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function startCountdown(id, dateStr) {
+      const el = document.getElementById(id);
+      const target = new Date(dateStr).getTime();
+      function update() {
+        const now = new Date().getTime();
+        const diff = target - now;
+        if (diff <= 0) {
+          el.textContent = "Event Started";
+          return;
+        }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      update();
+      setInterval(update, 1000);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      startCountdown("countdown-vegas", "2026-05-06T00:00:00");
+      startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.querySelector(".loader").style.display = "none";
+      }, 1500);
+    });
+  </script>
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.querySelector(".loader").style.display = "none";
+    }, 2800); // After all letters appear
+  });
+</script>
+</body>
+</html>
