@@ -962,5 +962,48 @@ musicToggle.addEventListener("click", () => {
   AOS.refresh();
 });
 </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const music = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicIcon = document.getElementById("musicIcon");
+
+  let isPlaying = false;
+  let musicStarted = false;
+
+  // First interaction
+  function tryPlayMusic() {
+    if (!musicStarted) {
+      music.play().then(() => {
+        isPlaying = true;
+        musicStarted = true;
+        musicIcon.style.opacity = "1";
+        // Clean up listeners
+        window.removeEventListener("scroll", tryPlayMusic);
+        document.removeEventListener("click", tryPlayMusic);
+      }).catch((err) => {
+        console.warn("Autoplay blocked by browser:", err);
+      });
+    }
+  }
+
+  window.addEventListener("scroll", tryPlayMusic, { once: true });
+  document.addEventListener("click", tryPlayMusic, { once: true });
+
+  // Manual toggle
+  musicToggle.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent retriggering autoplay
+    if (isPlaying) {
+      music.pause();
+      musicIcon.style.opacity = "0.5";
+    } else {
+      music.play().then(() => {
+        musicIcon.style.opacity = "1";
+      });
+    }
+    isPlaying = !isPlaying;
+  });
+});
+</script>
 </body>
 </html>
