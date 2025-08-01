@@ -204,6 +204,39 @@ transform: scale(0.98);
       font-size: 1.4rem;
       font-weight: bold;
     }
+@keyframes fadeInUpSmooth {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.play-loader-button {
+  margin-top: 2rem;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.3rem;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(135deg, #ff944d, #ffc67c);
+  color: #fff8f0;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 3;
+  box-shadow: 0 8px 20px rgba(255, 140, 50, 0.4);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeInUpSmooth 0.5s ease-out 0.5s forwards; /* 2s delay to sync after text */
+}
+
+.play-loader-button:hover {
+  transform: scale(1.06);
+  background: linear-gradient(135deg, #ff7a26, #ffb366);
+  box-shadow: 0 10px 25px rgba(255, 120, 20, 0.5);
+}
 
     .golden-jubilee {
       background: linear-gradient(to right, #fff7f0, #fef9f5);
@@ -452,12 +485,14 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
       <span class="letter">5</span>
       <span class="letter">0</span>
     </div>
+<!-- 🎵 Play Me Button in Loader -->
+<button id="play-loader-btn" class="play-loader-button">Play Me💃</button>
   </div>
 
   <!-- Main Content -->
   <div id="main-content">
     <section class="hero" data-aos="fade-left" data-aos-duration="1200">
-      <img src="IMG_3475.png" class="animate-hero" alt="BA@50" />
+      <img src="hero-image.png" class="animate-hero" alt="BA@50" />
    <div class="hero-button" data-aos="zoom-in" data-aos-delay="500">
   <div>
  <button class="cta-button" id="rsvpBtn">Click to RSVP - Deadline: Sept 30 </button>
@@ -657,6 +692,21 @@ document.querySelector(".music-wrapper").classList.remove("hidden");
   }
 
   window.addEventListener("scroll", playMusicOnScroll, { once: true });
+</script>
+<script>
+  const loaderPlayBtn = document.getElementById("play-loader-btn");
+
+  loaderPlayBtn.addEventListener("click", () => {
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      musicStarted = true;
+      loaderPlayBtn.disabled = true;
+      loaderPlayBtn.textContent = "Playing 🎵";
+      loaderPlayBtn.style.opacity = 0.5;
+    }).catch((err) => {
+      console.warn("Failed to autoplay:", err);
+    });
+  });
 </script>
 </body>
 </html>
