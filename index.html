@@ -640,5 +640,23 @@ document.querySelector(".music-wrapper").classList.remove("hidden");
     isPlaying = !isPlaying;
   });
 </script>
+  <script>
+  // Auto-play music on first scroll
+  let musicStarted = false;
+
+  function playMusicOnScroll() {
+    if (!musicStarted) {
+      document.getElementById("background-music").play().then(() => {
+  musicStarted = true;
+  isPlaying = true; // <-- this syncs the button toggle
+  window.removeEventListener("scroll", playMusicOnScroll);
+}).catch((e) => {
+  console.warn("Autoplay failed:", e);
+});
+    }
+  }
+
+  window.addEventListener("scroll", playMusicOnScroll, { once: true });
+</script>
 </body>
 </html>
