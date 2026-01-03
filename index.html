@@ -643,13 +643,13 @@ document.querySelector(".music-wrapper").classList.remove("hidden");
 </script>
 <script>
   // Toggle this single value
-  const RSVP_ENABLED = false; // change to true later to enable
+  const RSVP_ENABLED = true; // change to true later to enable
 
   const rsvpBtn = document.getElementById("rsvpBtn");
 
   if (RSVP_ENABLED) {
     rsvpBtn.disabled = false;
-    rsvpBtn.textContent = "Click to RSVP - Deadline: Sept 30";
+    rsvpBtn.textContent = "Click to RSVP";
     rsvpBtn.style.background = "linear-gradient(145deg, #ffa500, #ffc67c)";
     rsvpBtn.style.opacity = "1";
     rsvpBtn.style.cursor = "pointer";
