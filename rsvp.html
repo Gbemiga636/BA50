@@ -630,26 +630,73 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
         <p style="margin-bottom: 2rem;">Check out the next step below!</p>
       </div>
 
-      <div class="step" id="step2">
-        <h2>Your Details</h2>
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="text" name="spouse" placeholder="Spouse Name (Optional)" />
-        <input type="email" name="email" placeholder="Email Address" required />
-        <input type="tel" name="phone" placeholder="Phone Number" required />
-<input type="number" name="attendees" placeholder="Number of People Attending" min="1" required />
+    <div class="step" id="step2">
+  <h2>Your Details</h2>
 
-<textarea name="comment" placeholder="Any message or special request?" rows="4"></textarea>
-      </div>
+  <p style="
+    font-size: 0.95rem;
+    font-style: italic;
+    opacity: 0.75;
+    margin-bottom: 1.2rem;
+  ">
+    Kindly note: Due to limited space, attendance is limited to invited guests and their spouses only.
+Thank you for understanding
+  </p>
 
-      <div class="step" id="step3">
-        <h2>Which Party Will You Attend?</h2>
-        <div class="party-buttons">
-          <button type="button" onclick="selectParty('Las Vegas')">PLAN TO ATTEND LAS VEGAS PARTY</button>
-          <button type="button" onclick="selectParty('Atlanta')">PLAN TO ATTEND ATLANTA GEORGIA PARTY</button>
-          <button type="button" onclick="selectParty('Both')">PLAN TO ATTEND BOTH</button>
-           <button type="button" onclick="selectParty('Regret')">REGRET UNABLE TO ATTEND</button>
-        </div>
-      </div>
+  <input type="text" name="name" placeholder="Your Name" required />
+  <input type="text" name="spouse" placeholder="Spouse Name (Optional)" />
+<!-- <input type="email" name="email" placeholder="Email Address" required />
+  <input type="tel" name="phone" placeholder="Phone Number" required />
+  <input type="number" name="attendees" placeholder="Number of People Attending" min="1" required />-->
+
+  <textarea name="comment" placeholder="Any message or special request?" rows="4"></textarea>
+</div>
+     <div class="step" id="step3">
+  <h2>Event Details</h2>
+
+  <p style="font-weight:bold; margin-bottom:1rem;">
+    Sunday, May 10th, 2026
+  </p>
+
+  <div style="text-align:left; margin-bottom:1.5rem;">
+    <p><strong>Prayer Session</strong><br>
+      ⏰ 10:00 AM – 12:00 Noon<br>
+      📍 <em>La Casa de Biola - Dacula Georgia</em>
+    </p>
+
+    <p style="margin-top:0.8rem;">
+      <strong>Dress Code</strong><br>
+      Ladies: Rich auntie vibes - bright colors 🟡🟢🟣🟠<br>
+      Men: Black attire
+    </p>
+  </div>
+
+  <hr style="opacity:0.3; margin:1.5rem 0;">
+
+  <div style="text-align:left; margin-bottom:2rem;">
+    <p><strong>Dinner Party</strong><br>
+      ⏰ 5:00 PM<br>
+      📍 <em>VENUE WILL BE SHARED WITH CONFIRMED GUESTS </em>
+    </p>
+
+    <p style="margin-top:0.8rem;">
+      <strong>Dress Code</strong><br>
+      Women: Sparkle & Glam — jewel-on-jewel tones<br>
+      Men: GQ-style elegance
+    </p>
+  </div>
+
+  <h3 style="margin-bottom:1rem;">Will you be attending?</h3>
+
+  <div class="party-buttons">
+    <button type="button" onclick="selectParty('Attending')">
+      YES, I WILL ATTEND
+    </button>
+    <button type="button" onclick="selectParty('Regret')">
+      REGRET UNABLE TO ATTEND
+    </button>
+  </div>
+</div>
 
       <div class="step" id="step4">
         <h2>Thank You For Your Response!</h2>
@@ -677,9 +724,9 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
  
   <section class="countdowns" data-aos="fade-right" data-aos-delay="300">
 
-      <div class="countdown-box" data-aos="flip-left" data-aos-delay="400">
-        <h3>Las Vegas – May 6th to 9th</h3>
-        <div id="countdown-vegas" class="count">Loading...</div>
+    <!--<div class="countdown-box" data-aos="flip-left" data-aos-delay="400">
+        <h3>Las Vegas – May 6th to 9th</h3>-->
+       <!-- <div id="countdown-vegas" class="count">Loading...</div>-->
       </div>
       <div class="countdown-box" data-aos="flip-right" data-aos-delay="600">
         <h3>ATL, Georgia – May 10th</h3>
@@ -752,7 +799,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   <div class="footer-container">
     <div class="footer-column">
       <h4>📍 Event Locations</h4>
-      <p>Las Vegas, May 6th - 9th</p>
+     <!-- <p>Las Vegas, May 6th - 9th</p>-->
       <p>Atlanta Georgia, May 10th</p>
     </div>
    
@@ -770,8 +817,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
     let steps, indicators, backBtn, nextBtn, partyButtons;
 
     window.addEventListener("load", () => {
-      startCountdown("countdown-vegas", "2026-05-06T00:00:00");
-      startCountdown("countdown-atlanta", "2026-05-10T00:00:00");
+      startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
 
       steps = document.querySelectorAll('.step');
       indicators = document.getElementById('stepIndicators');
@@ -941,11 +987,9 @@ musicToggle.addEventListener("click", () => {
 
   // SINGLE load event
   window.addEventListener("load", () => {
-    startCountdown("countdown-vegas", "2026-05-06T00:00:00");
     startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
 
     window.addEventListener("load", () => {
-  startCountdown("countdown-vegas", "2026-05-06T00:00:00");
   startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
 
   const mainContent = document.getElementById("main-content");
@@ -962,7 +1006,7 @@ musicToggle.addEventListener("click", () => {
   AOS.refresh();
 });
 </script>
-  <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const music = document.getElementById("bgMusic");
   const musicToggle = document.getElementById("musicToggle");
@@ -1005,5 +1049,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
 </body>
 </html>
