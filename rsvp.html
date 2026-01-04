@@ -612,12 +612,12 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
     box-shadow: 0 10px 16px rgba(0, 0, 0, 0.25);
   }
 
-  .party-buttons button.selected {
-    background: linear-gradient(to right, #e85d04, #ffba08);
-    color: white;
-    box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
-    transform: scale(1.02);
-  }
+.party-buttons button.selected {
+  background: linear-gradient(to right, #d62828, #f77f00);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 120, 0, 0.9);
+  transform: scale(1.05);
+}
 </style>
 </head>
 <body class="page-fade-in">
@@ -639,7 +639,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
     opacity: 0.75;
     margin-bottom: 1.2rem;
   ">
-     <strong style="color:#4b2e2e;">KINDLY NOTE:</strong> Due to limited space, attendance is limited to invited guests and their spouses only.
+  <strong style="color:#4b2e2e;">KINDLY NOTE:</strong> Due to limited space, attendance is limited to invited guests and their spouses only.
 Thank you for your understanding
   </p>
 
@@ -689,12 +689,12 @@ Thank you for your understanding
   <h3 style="margin-bottom:1rem;">Will you be attending?</h3>
 
   <div class="party-buttons">
-    <button type="button" onclick="selectParty('Attending')">
-      YES, I WILL ATTEND
-    </button>
-    <button type="button" onclick="selectParty('Regret')">
-      REGRET UNABLE TO ATTEND
-    </button>
+   <button type="button" data-party="Attending" onclick="selectParty('Attending')">
+  YES, I WILL ATTEND
+</button>
+<button type="button" data-party="Regret" onclick="selectParty('Regret')">
+  REGRET UNABLE TO ATTEND
+</button>
   </div>
 </div>
 
@@ -895,13 +895,19 @@ function nextStep() {
     }
 
     function selectParty(party) {
-      document.getElementById('partyChoice').value = party;
-      partySelected = true;
+  const buttons = document.querySelectorAll(".party-buttons button");
+  const hiddenInput = document.getElementById("partyChoice");
 
-      partyButtons.forEach(btn => btn.classList.remove('selected'));
-      const selectedBtn = Array.from(partyButtons).find(btn => btn.textContent.toUpperCase().includes(party.toUpperCase()));
-      if (selectedBtn) selectedBtn.classList.add('selected');
+  hiddenInput.value = party;
+  partySelected = true;
+
+  buttons.forEach(btn => {
+    btn.classList.remove("selected");
+    if (btn.dataset.party === party) {
+      btn.classList.add("selected");
     }
+  });
+}
 
     function startCountdown(id, dateStr) {
       const el = document.getElementById(id);
