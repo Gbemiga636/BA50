@@ -129,6 +129,21 @@ transform: scale(0.98);
       display: flex;
       justify-content: center;
     }
+.hidden {
+  display: none;
+}
+
+/* Music icon bounce and shake animation */
+@keyframes bounceShake {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(3deg); }
+  50% { transform: translateY(3px) rotate(-3deg); }
+  75% { transform: translateY(-2px) rotate(2deg); }
+}
+
+.floating-music-btn.bounce {
+  animation: bounceShake 2s infinite ease-in-out;
+}
 
     .cta-button {
       padding: 1rem 2.5rem;
@@ -210,6 +225,30 @@ transform: scale(0.98);
       font-style: italic;
       opacity: 0.8;
     }
+.floating-music-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  background: none;
+  border: none;
+  width: 90px;
+  height: 90px;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.floating-music-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+.floating-music-btn:hover {
+  transform: scale(1.1);
+}
 
     .blank-section {
       height: 350px;
@@ -237,6 +276,21 @@ transform: scale(0.98);
     opacity: 1;
     transform: translateY(0);
   }
+}
+.cta-main-text {
+  display: block;
+}
+
+.cta-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-top: 0.1rem; /* smaller space between lines */
+  line-height: 1.1;    /* tighter line height */
 }
 
     .quote {
@@ -385,6 +439,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   100% { transform: rotateX(360deg) rotateY(360deg); }
 }
 </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -403,12 +458,11 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   <!-- Main Content -->
   <div id="main-content">
     <section class="hero" data-aos="fade-left" data-aos-duration="1200">
-      <img src="hero-image.png" class="animate-hero" alt="BA@50" />
+      <img src="IMG_3475.png" class="animate-hero" alt="BA@50" />
    <div class="hero-button" data-aos="zoom-in" data-aos-delay="500">
   <div>
-    <button class="cta-button" id="rsvpBtn">Send in your RSVP today!</button>
-    <div class="rsvp-note">RSVP by September 30<sup>th</sup></div>
-  </div>
+ <button class="cta-button" id="rsvpBtn">Click to RSVP - Deadline: Sept 30 </button>
+    
 </div>
     </section>
 
@@ -425,7 +479,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
         <div id="countdown-vegas" class="count">Loading...</div>
       </div>
       <div class="countdown-box" data-aos="flip-right" data-aos-delay="600">
-        <h3>ATL, Georgia – May 9th and 10th</h3>
+        <h3>ATL, Georgia – May 10th</h3>
         <div id="countdown-atlanta" class="count">Loading...</div>
       </div>
     </section>
@@ -497,7 +551,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
     <div class="footer-column">
       <h4>📍 Event Locations</h4>
       <p>Las Vegas, May 6th - 9th</p>
-      <p>Atlanta Georgia, May 9th and 10th</p>
+      <p>Atlanta Georgia, May 10th</p>
     </div>
    
   <div class="footer-bottom">
@@ -532,13 +586,14 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   // SINGLE load event
   window.addEventListener("load", () => {
     startCountdown("countdown-vegas", "2026-05-06T00:00:00");
-    startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
+    startCountdown("countdown-atlanta", "2026-05-10T00:00:00");
 
     setTimeout(() => {
       document.querySelector(".loader").style.display = "none";
       const mainContent = document.getElementById("main-content");
       mainContent.style.display = "block";
 mainContent.classList.add("visible");
+document.querySelector(".music-wrapper").classList.remove("hidden");
 
       // ✅ Now that content is visible, initialize AOS
       AOS.init({
@@ -560,6 +615,49 @@ mainContent.classList.add("visible");
       window.location.href = "rsvp.html";
     }, 800); // must match transition duration in CSS
   });
+</script>
+<!-- 🎵 Floating Music Button -->
+<div class="music-wrapper hidden">
+  <button id="music-btn" class="floating-music-btn bounce" aria-label="Toggle Music">
+    <img src="music-icon.png" alt="Music Icon" />
+  </button>
+</div>
+
+<audio id="background-music" loop>
+  <source src="ba50-music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<script>
+  const musicBtn = document.getElementById("music-btn");
+  const bgMusic = document.getElementById("background-music");
+  let isPlaying = false;
+
+  musicBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+      bgMusic.play();
+    } else {
+      bgMusic.pause();
+    }
+    isPlaying = !isPlaying;
+  });
+</script>
+  <script>
+  // Auto-play music on first scroll
+  let musicStarted = false;
+
+  function playMusicOnScroll() {
+    if (!musicStarted) {
+      document.getElementById("background-music").play().then(() => {
+  musicStarted = true;
+  isPlaying = true; // <-- this syncs the button toggle
+  window.removeEventListener("scroll", playMusicOnScroll);
+}).catch((e) => {
+  console.warn("Autoplay failed:", e);
+});
+    }
+  }
+
+  window.addEventListener("scroll", playMusicOnScroll, { once: true });
 </script>
 </body>
 </html>

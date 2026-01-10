@@ -619,6 +619,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   transform: scale(1.05);
 }
 </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="page-fade-in">
   <div class="container">
@@ -644,10 +645,13 @@ Thank you for your understanding
   </p>
 
   <input type="text" name="name" placeholder="Your Name" required />
-<!--  <input type="text" name="spouse" placeholder="Spouse Name (Optional)" />
-<!-- <input type="email" name="email" placeholder="Email Address" required />
+<!--
+  Optional fields (disabled for now)
+  <input type="text" name="spouse" placeholder="Spouse Name (Optional)" />
+  <input type="email" name="email" placeholder="Email Address" required />
   <input type="tel" name="phone" placeholder="Phone Number" required />
-  <input type="number" name="attendees" placeholder="Number of People Attending" min="1" required />-->
+  <input type="number" name="attendees" placeholder="Number of People Attending" min="1" required />
+-->
 
   <textarea name="comment" placeholder="Any message or special request?" rows="4"></textarea>
 </div>
@@ -681,7 +685,7 @@ Thank you for your understanding
 
     <p style="margin-top:0.8rem;">
       <strong>Dress Code</strong><br>
-      Women: Jewel-tone colors-elevated with sparkle and a touch of glam.💎✨<br>
+      Women: Jewel-tone colors — elevated with sparkles and a touch of glam.💎✨<br>
       Men: GQ-style elegance
     </p>
   </div>
@@ -715,7 +719,7 @@ Thank you for your understanding
 <!-- Music Toggle Button -->
 <div style="text-align: center; margin-top: 3rem;">
   <button id="musicToggle" style="background: transparent; border: none; cursor: pointer;">
-    <img src="your-music-icon.png" alt="Music" id="musicIcon" style="width: 150px; height: 1500px;">
+    <img src="your-music-icon.png" alt="Music" id="musicIcon" style="width: 150px; height: 150px;">
   </button>
   <audio id="bgMusic" src="ba50-music.mp3" loop></audio>
 </div>
@@ -913,18 +917,34 @@ function nextStep() {
       const el = document.getElementById(id);
       const target = new Date(dateStr).getTime();
 
+      function pad2(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function render(d, h, m, s) {
+        const dayStr = String(d).padStart(2, "0");
+        return `
+          <div class="countdown-clock" role="timer" aria-live="polite" aria-label="Countdown">
+            <div class="countdown-seg"><div class="countdown-num">${dayStr}</div><div class="countdown-label">Days</div></div>
+            <div class="countdown-seg"><div class="countdown-num">${pad2(h)}</div><div class="countdown-label">Hours</div></div>
+            <div class="countdown-seg"><div class="countdown-num">${pad2(m)}</div><div class="countdown-label">Minutes</div></div>
+            <div class="countdown-seg"><div class="countdown-num">${pad2(s)}</div><div class="countdown-label">Seconds</div></div>
+          </div>
+        `;
+      }
+
       function update() {
         const now = new Date().getTime();
         const diff = target - now;
         if (diff <= 0) {
-          el.textContent = "Event Started";
+          el.innerHTML = '<span class="countdown-complete">Event Started</span>';
           return;
         }
         const d = Math.floor(diff / (1000 * 60 * 60 * 24));
         const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const m = Math.floor((diff / 1000 / 60) % 60);
         const s = Math.floor((diff / 1000) % 60);
-        el.textContent = `${d}d ${h}h ${m}m ${s}s`;
+        el.innerHTML = render(d, h, m, s);
       }
 
       update();
@@ -970,48 +990,19 @@ musicToggle.addEventListener("click", () => {
 });
   </script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-  function startCountdown(id, dateStr) {
-    const el = document.getElementById(id);
-    const target = new Date(dateStr).getTime();
-    function update() {
-      const now = new Date().getTime();
-      const diff = target - now;
-      if (diff <= 0) {
-        el.textContent = "Event Started";
-        return;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.AOS) {
+        AOS.init({
+          once: true,
+          duration: 1000,
+          offset: 100,
+          easing: "ease-in-out",
+        });
+        AOS.refresh();
       }
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / 1000 / 60) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-      el.textContent = `${d}d ${h}h ${m}m ${s}s`;
-    }
-    update();
-    setInterval(update, 1000);
-  }
-
-  // SINGLE load event
-  window.addEventListener("load", () => {
-    startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
-
-    window.addEventListener("load", () => {
-  startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
-
-  const mainContent = document.getElementById("main-content");
-  mainContent.style.display = "block";
-  mainContent.classList.add("visible");
-
-  AOS.init({
-    once: true,
-    duration: 1000,
-    offset: 100,
-    easing: 'ease-in-out',
-  });
-
-  AOS.refresh();
-});
-</script>
+    });
+  </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const music = document.getElementById("bgMusic");
