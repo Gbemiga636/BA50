@@ -377,11 +377,20 @@ textarea:focus {
 }
 
 .poem p,
-.quote p,
-.golden-jubilee p {
+.quote p {
   color: var(--muted);
   font-size: 1.15rem;
   line-height: 1.9;
+}
+
+.golden-jubilee p {
+  color: var(--muted);
+  font-size: clamp(0.98rem, 3.4vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.golden-jubilee .gj-line {
+  display: block;
 }
 
 .quote {
