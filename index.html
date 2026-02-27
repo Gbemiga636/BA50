@@ -484,6 +484,11 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
 .cube-face.top    { transform: rotateX(90deg) translateZ(50px); }
 .cube-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
 
+.cube-hash .cube-face {
+  color: #000;
+  font-weight: 800;
+}
+
 @keyframes rotateCube {
   0%   { transform: rotateX(0deg) rotateY(0deg); }
   100% { transform: rotateX(360deg) rotateY(360deg); }
@@ -708,7 +713,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
           <section class="cube-container" data-aos="zoom-in">
             <h2 class="glitch-font" style="color:rgba(255,250,246,0.92);margin-bottom:2rem;">#BiolaGlam50</h2>
             <div class="cube-grid">
-              <div class="cube">
+              <div class="cube cube-hash">
                 <div class="cube-face front">#</div>
                 <div class="cube-face back">#</div>
                 <div class="cube-face right">#</div>
