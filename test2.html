@@ -346,10 +346,10 @@
       startCountdown("countdown-vegas", "2026-05-06T00:00:00");
       startCountdown("countdown-atlanta", "2026-05-09T00:00:00");
 
-      // Hide loader after all letters animate (around 2.6s total)
+      // Hide loader after all letters animate + extra hold time
       setTimeout(() => {
         document.querySelector(".loader").style.display = "none";
-      }, 2800);
+      }, 7000);
     });
   </script>
 </body>
