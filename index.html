@@ -72,6 +72,8 @@ transform: scale(0.98);
 
     .loader-text {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 0.6rem;
       font-size: 3.8rem;
       font-family: 'Playfair Display', serif;
@@ -93,6 +95,13 @@ transform: scale(0.98);
     .letter:nth-child(3) { animation-delay: 1.2s; }
     .letter:nth-child(4) { animation-delay: 1.6s; }
     .letter:nth-child(5) { animation-delay: 2.0s; }
+    .letter:nth-child(6) { animation-delay: 2.4s; }
+    .letter:nth-child(7) { animation-delay: 2.8s; }
+    .letter:nth-child(8) { animation-delay: 3.2s; }
+    .letter:nth-child(9) { animation-delay: 3.6s; }
+    .letter:nth-child(10) { animation-delay: 4.0s; }
+    .letter:nth-child(11) { animation-delay: 4.4s; }
+    .letter:nth-child(12) { animation-delay: 4.8s; }
 
     @keyframes reveal {
       to {
@@ -430,7 +439,7 @@ transform: scale(0.98);
 .cube-grid {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(2, 100px);
+  grid-template-rows: repeat(4, 100px);
   gap: 15px;
   justify-content: center;
   align-items: center;
@@ -480,9 +489,16 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
   <div class="loader">
     <div class="loader-overlay"></div>
     <div class="loader-text">
+      <span class="letter">#</span>
       <span class="letter">B</span>
-      <span class="letter">A</span>
-      <span class="letter">@</span>
+      <span class="letter">i</span>
+      <span class="letter">o</span>
+      <span class="letter">l</span>
+      <span class="letter">a</span>
+      <span class="letter">G</span>
+      <span class="letter">l</span>
+      <span class="letter">a</span>
+      <span class="letter">m</span>
       <span class="letter">5</span>
       <span class="letter">0</span>
     </div>
@@ -536,7 +552,7 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
           </div>
 
           <div class="hero-media">
-            <img src="hero-new.png" class="animate-hero" alt="#BiolaGlam50" />
+            <img src="hero.jpeg" class="animate-hero" alt="#BiolaGlam50" />
           </div>
         </div>
       </section>
@@ -682,8 +698,16 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
       <section class="section" data-aos="fade-up" data-aos-delay="400">
         <div class="section-inner">
           <section class="cube-container" data-aos="zoom-in">
-            <h2 class="glitch-font" style="color:rgba(255,250,246,0.92);margin-bottom:2rem;">B A @ 5 0</h2>
+            <h2 class="glitch-font" style="color:rgba(255,250,246,0.92);margin-bottom:2rem;">#BiolaGlam50</h2>
             <div class="cube-grid">
+              <div class="cube">
+                <div class="cube-face front">#</div>
+                <div class="cube-face back">#</div>
+                <div class="cube-face right">#</div>
+                <div class="cube-face left">#</div>
+                <div class="cube-face top">#</div>
+                <div class="cube-face bottom">#</div>
+              </div>
               <div class="cube">
                 <div class="cube-face front">B</div>
                 <div class="cube-face back">B</div>
@@ -693,20 +717,68 @@ box-shadow: 0 0 15px rgba(245, 166, 35, 0.3);
                 <div class="cube-face bottom">B</div>
               </div>
               <div class="cube">
-                <div class="cube-face front">A</div>
-                <div class="cube-face back">A</div>
-                <div class="cube-face right">A</div>
-                <div class="cube-face left">A</div>
-                <div class="cube-face top">A</div>
-                <div class="cube-face bottom">A</div>
+                <div class="cube-face front">i</div>
+                <div class="cube-face back">i</div>
+                <div class="cube-face right">i</div>
+                <div class="cube-face left">i</div>
+                <div class="cube-face top">i</div>
+                <div class="cube-face bottom">i</div>
               </div>
               <div class="cube">
-                <div class="cube-face front">@</div>
-                <div class="cube-face back">@</div>
-                <div class="cube-face right">@</div>
-                <div class="cube-face left">@</div>
-                <div class="cube-face top">@</div>
-                <div class="cube-face bottom">@</div>
+                <div class="cube-face front">o</div>
+                <div class="cube-face back">o</div>
+                <div class="cube-face right">o</div>
+                <div class="cube-face left">o</div>
+                <div class="cube-face top">o</div>
+                <div class="cube-face bottom">o</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">l</div>
+                <div class="cube-face back">l</div>
+                <div class="cube-face right">l</div>
+                <div class="cube-face left">l</div>
+                <div class="cube-face top">l</div>
+                <div class="cube-face bottom">l</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">a</div>
+                <div class="cube-face back">a</div>
+                <div class="cube-face right">a</div>
+                <div class="cube-face left">a</div>
+                <div class="cube-face top">a</div>
+                <div class="cube-face bottom">a</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">G</div>
+                <div class="cube-face back">G</div>
+                <div class="cube-face right">G</div>
+                <div class="cube-face left">G</div>
+                <div class="cube-face top">G</div>
+                <div class="cube-face bottom">G</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">l</div>
+                <div class="cube-face back">l</div>
+                <div class="cube-face right">l</div>
+                <div class="cube-face left">l</div>
+                <div class="cube-face top">l</div>
+                <div class="cube-face bottom">l</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">a</div>
+                <div class="cube-face back">a</div>
+                <div class="cube-face right">a</div>
+                <div class="cube-face left">a</div>
+                <div class="cube-face top">a</div>
+                <div class="cube-face bottom">a</div>
+              </div>
+              <div class="cube">
+                <div class="cube-face front">m</div>
+                <div class="cube-face back">m</div>
+                <div class="cube-face right">m</div>
+                <div class="cube-face left">m</div>
+                <div class="cube-face top">m</div>
+                <div class="cube-face bottom">m</div>
               </div>
               <div class="cube">
                 <div class="cube-face front">5</div>
